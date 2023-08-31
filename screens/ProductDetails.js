@@ -8,8 +8,11 @@ import {
   Fontisto,
 } from "@expo/vector-icons"
 import { useState } from "react"
+import { useRoute } from "@react-navigation/native"
 const ProductDetails = ({ navigation }) => {
   const [count, setCount] = useState(1)
+  const { params } = useRoute()
+  const { item } = params
 
   const increment = () => {
     setCount((prev) => prev + 1)
@@ -32,15 +35,15 @@ const ProductDetails = ({ navigation }) => {
 
       <Image
         source={{
-          uri: "https://st4.depositphotos.com/1023934/37752/i/450/depositphotos_377527168-stock-photo-interior-design-modern-living-room.jpg",
+          uri: item.imageUrl,
         }}
         style={styles.img}
       />
       <View style={styles.details}>
         <View style={styles.titleRow}>
-          <Text style={styles.title}>Sofa</Text>
+          <Text style={styles.title}>{item.title}</Text>
           <View style={styles.priceWrapper}>
-            <Text style={styles.price}>$500</Text>
+            <Text style={styles.price}>${item.price}</Text>
           </View>
         </View>
 
@@ -66,12 +69,7 @@ const ProductDetails = ({ navigation }) => {
 
         <View style={styles.descWrapper}>
           <Text style={styles.desc}>Description</Text>
-          <Text style={styles.descText}>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Deleniti
-            obcaecati, quis reiciendis laborum voluptatibus cum perspiciatis
-            quidem, harum consequatur amet libero porro iste quisquam
-            recusandae. Maxime explicabo magni similique nobis.
-          </Text>
+          <Text style={styles.descText}>{item.desc}</Text>
         </View>
 
         <View style={{ marginBottom: SIZES.xSmall }}>
@@ -80,7 +78,7 @@ const ProductDetails = ({ navigation }) => {
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}
             >
               <Ionicons name="location-outline" size={20} />
-              <Text>Sydney</Text>
+              <Text>{item.product_location}</Text>
             </View>
             <View
               style={{ flexDirection: "row", alignItems: "center", gap: 4 }}

@@ -6,24 +6,26 @@ import { COLORS } from "../../constants"
 const ProductCard = ({ item }) => {
   const navigation = useNavigation()
   return (
-    <TouchableOpacity onPress={() => navigation.navigate("ProductDetails")}>
+    <TouchableOpacity
+      onPress={() => navigation.navigate("ProductDetails", { item })}
+    >
       <View style={styles.container}>
         <View style={styles.imgContainer}>
           <Image
             source={{
-              uri: "https://st4.depositphotos.com/1023934/37752/i/450/depositphotos_377527168-stock-photo-interior-design-modern-living-room.jpg",
+              uri: item.imageUrl,
             }}
             style={styles.img}
           />
         </View>
         <View style={styles.details}>
           <Text style={styles.title} numberOfLines={1}>
-            Product
+            {item.title}
           </Text>
           <Text style={styles.supplier} numberOfLines={1}>
-            Supplier
+            {item.supplier}
           </Text>
-          <Text style={styles.price}>$500</Text>
+          <Text style={styles.price}>$ {item.price}</Text>
         </View>
 
         <TouchableOpacity style={styles.addBtn}>
